@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\User;
+use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use RuntimeException;
 
@@ -12,10 +12,10 @@ class AdminUserSeeder extends Seeder
     public function run(): void
     {
         $name = 'admin';
-        $email = "admin@example.com";
-        $password = "admin123";
+        $email = 'admin@example.com';
+        $password = 'admin123';
 
-        if (!$name || !$email || !$password) {
+        if (! $name || ! $email || ! $password) {
             throw new RuntimeException(
                 'Set ADMIN_NAME, ADMIN_EMAIL and ADMIN_PASSWORD in your seeder file.'
             );
@@ -26,6 +26,8 @@ class AdminUserSeeder extends Seeder
             [
                 'name' => $name,
                 'password' => Hash::make($password),
+                'role' => 'administrator',
+                'is_active' => true,
             ]
         );
 
