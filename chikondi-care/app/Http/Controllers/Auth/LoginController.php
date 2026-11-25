@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\AuditLog;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -39,6 +40,14 @@ class LoginController extends Controller
 
             $user->update(['last_login_at' => now()]);
 
+            AuditLog::create([
+                'user_id' => $user->id,
+                'action' => 'login',
+                'subject' => 'Authentication',
+                'description' => "{$user->name} signed in",
+                'ip_address' => $request->ip(),
+            ]);
+
             $dashboard = match ($user->role) {
                 'administrator' => 'admin.dashboard',
                 'receptionist' => 'receptionist.dashboard',
@@ -60,6 +69,19 @@ class LoginController extends Controller
 
     public function logout(Request $request): RedirectResponse
     {
+        /** @var User|null $user */
+        $user = Auth::user();
+
+        if ($user) {
+            AuditLog::create([
+                'user_id' => $user->id,
+                'action' => 'logout',
+                'subject' => 'Authentication',
+                'description' => "{$user->name} signed out",
+                'ip_address' => $request->ip(),
+            ]);
+        }
+
         Auth::logout();
 
         $request->session()->invalidate();

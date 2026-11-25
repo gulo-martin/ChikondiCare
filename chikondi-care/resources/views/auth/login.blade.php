@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login | ChikondiCare</title>
+    <link rel="icon" href="{{ asset('/') }}">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
@@ -18,8 +19,13 @@
             <!-- LEFT PANEL -->
             <section class="relative hidden overflow-hidden bg-gradient-to-br
                             from-[#ffff] via-[#fff] to-[#fff]
-                            p-0 text-white lg:flex lg:flex-col lg:justify-center z-10 h-full w-full flex flex-col items-center">
+                            p-0 text-black lg:flex lg:flex-col lg:justify-center z-10 h-full w-full flex flex-col items-center">
 
+
+                <a href=" {{ url('/') }}"  class=" w-[20%] text-center absolute left-5 top-5 z-30 rounded-xl bg-[#6475E8] px-5 py-4
+                                   text-sm font-semibold text-white shadow-lg
+                                   shadow-[#6475E8]/20 transition
+                                   hover:bg-[#5264D5] active:scale-[0.99]" >Back</a>
 
                 <!-- Main message -->
                 <div class="relative ">
@@ -28,6 +34,7 @@
                     <!-- Illustration -->
                     <div class=" ">
                         <img
+                            loading="lazy"
                             src="{{ asset('images/login-illustration.png') }}"
                             alt="Healthcare administrator working at a computer"
                             class="h-full w-full object-contain "
@@ -35,9 +42,6 @@
                     </div>
                 </div>
 
-                <!-- <p class="relative z-10 text-sm text-white/70">
-                    © {{ date('Y') }} ChikondiCare. All rights reserved.
-                </p> -->
 
             </section>
 
@@ -57,12 +61,6 @@
                             ChikondiCare
                         </span>
                     </div>
-
-                    <!-- Logo -->
-                    <!-- <div class="mb-7 flex h-14 w-14 items-center justify-center
-                                rounded-full bg-[#6475E8] text-2xl font-bold text-white">
-                        C
-                    </div> -->
 
                     <h2 class="text-3xl font-bold tracking-tight text-gray-900">
                         Welcome Back

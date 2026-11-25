@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
+use App\Models\ConsultationFee;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -15,13 +15,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
-
         $this->call(AdminUserSeeder::class);
+
+        ConsultationFee::query()->firstOrCreate(
+            ['name' => 'General consultation'],
+            ['amount' => 5000, 'is_active' => true]
+        );
     }
 }
